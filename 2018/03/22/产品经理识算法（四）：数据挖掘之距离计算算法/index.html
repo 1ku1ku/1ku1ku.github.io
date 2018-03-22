@@ -78,7 +78,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="产品经理," />
 
 
 
@@ -89,16 +89,27 @@
 
 
 
-<meta name="description" content="万事从人，百年皆客。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="人生若只如初见">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta name="description" content="在数据挖掘和分析的过程中，我们经常需要知道某两个或多个分析对象之间的差异性，从而判别分析对象之间的相似性和所属类别。在数据分析和挖掘领域，用得最多的就是“分类”和“聚类”算法，如：KNN 和 K-Means。今天将主流的一些距离计算算法做一个归纳。">
+<meta name="keywords" content="产品经理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="产品经理识算法（四）：数据挖掘之距离计算算法">
+<meta property="og:url" content="http://yoursite.com/2018/03/22/产品经理识算法（四）：数据挖掘之距离计算算法/index.html">
 <meta property="og:site_name" content="人生若只如初见">
-<meta property="og:description" content="万事从人，百年皆客。">
+<meta property="og:description" content="在数据挖掘和分析的过程中，我们经常需要知道某两个或多个分析对象之间的差异性，从而判别分析对象之间的相似性和所属类别。在数据分析和挖掘领域，用得最多的就是“分类”和“聚类”算法，如：KNN 和 K-Means。今天将主流的一些距离计算算法做一个归纳。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1897276-0c687deae556fda4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1897276-b92a178455023ae3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1897276-eddb1c928d7693a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1897276-018e89d9b940b898.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1897276-a844b82c9201882f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1897276-c3c0a30b73b7d501.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1897276-fea81c9674f0c9dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1897276-ef6bd871d7fee03f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/398">
+<meta property="og:updated_time" content="2018-03-22T13:25:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="人生若只如初见">
-<meta name="twitter:description" content="万事从人，百年皆客。">
+<meta name="twitter:title" content="产品经理识算法（四）：数据挖掘之距离计算算法">
+<meta name="twitter:description" content="在数据挖掘和分析的过程中，我们经常需要知道某两个或多个分析对象之间的差异性，从而判别分析对象之间的相似性和所属类别。在数据分析和挖掘领域，用得最多的就是“分类”和“聚类”算法，如：KNN 和 K-Means。今天将主流的一些距离计算算法做一个归纳。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1897276-0c687deae556fda4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
 
 
 
@@ -128,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/22/产品经理识算法（四）：数据挖掘之距离计算算法/"/>
 
 
 
 
 
-  <title>归档 | 人生若只如初见</title>
+  <title>产品经理识算法（四）：数据挖掘之距离计算算法 | 人生若只如初见</title>
   
 
 
@@ -153,7 +164,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,411 +282,216 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/产品经理识算法（四）：数据挖掘之距离计算算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小吴同学">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oaab9z8h3.bkt.clouddn.com/%E5%A4%B4%E5%83%8F01.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人生若只如初见">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">产品经理识算法（四）：数据挖掘之距离计算算法</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T21:23:19+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 13 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PM/" itemprop="url" rel="index">
+                    <span itemprop="name">PM</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/22/产品经理识算法（四）：数据挖掘之距离计算算法/" itemprop="url">
-              
-                <span itemprop="name">产品经理识算法（四）：数据挖掘之距离计算算法</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-22T21:23:19+08:00"
-              content="2018-03-22" >
-          03-22
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/16/产品经理识算法（三）：个性化推荐/" itemprop="url">
-              
-                <span itemprop="name">产品经理识算法（三）：个性化推荐</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-16T19:00:38+08:00"
-              content="2018-03-16" >
-          03-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/15/谁知道这首诗的名字？/" itemprop="url">
-              
-                <span itemprop="name">谁知道这首诗的名字？</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-15T21:00:43+08:00"
-              content="2018-03-15" >
-          03-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>在数据挖掘和分析的过程中，我们经常需要知道某两个或多个分析对象之间的差异性，从而判别分析对象之间的相似性和所属类别。在数据分析和挖掘领域，用得最多的就是“分类”和“聚类”算法，如：KNN 和 K-Means。今天将主流的一些距离计算算法做一个归纳。<br><a id="more"></a><br>为了方便理解，我们暂定分析的对象只有两个个体 A 和个体 B，并且两个个体在同一个维度：</p>
+<p>A（a1,a2,a3…an）<br>B（b1,b2,b3…bn）<br>我们先来了解一下相关名词，距离度量（Distance）是用来衡量空间上两个个体之间的距离，接下来一些算法公式中会频繁使用这个概念，我们在公式中用“<em>dist</em>“表示。</p>
+<h3 id="欧几里得距离"><a href="#欧几里得距离" class="headerlink" title="欧几里得距离"></a>欧几里得距离</h3><p>这是最常见的距离度量公式，读书在数学课本中已有接触，公式如下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1897276-0c687deae556fda4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
+<p>这里需要提醒的是，我们开篇已经注明，是在同一个维度上的两个对象，如果一个描述的是距离（单位M），一个描述的是重量（单位KG），这样比较没有任何意义，也没有可比性。</p>
+<p>我们将上面的距离公式做个变形</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1897276-b92a178455023ae3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
+<p>做这样变形的目的就是是上面一些看上去僵硬不变的线条符号用数字表示出来，因为数字的是灵活的，会给人带来启发，如上面的公式中就有人获得灵感，将公式中的“2”用变量代替，结果会如何，这个人叫“明可夫斯基”，最后的距离公式被后人称作：</p>
+<h3 id="明可夫斯基距离"><a href="#明可夫斯基距离" class="headerlink" title="明可夫斯基距离"></a>明可夫斯基距离</h3><p><img src="https://upload-images.jianshu.io/upload_images/1897276-eddb1c928d7693a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
+<p>当t=2时，明可夫斯基距离公式等于欧几里得距离公式，使用绝对值因为变量t不能确保两者之差为非负数（关于这个问题上篇文章有提到过）。<br>当t=1时，明可夫斯基距离等于曼哈顿距离。</p>
+<h3 id="曼哈顿距离"><a href="#曼哈顿距离" class="headerlink" title="曼哈顿距离"></a>曼哈顿距离</h3><p><img src="https://upload-images.jianshu.io/upload_images/1897276-018e89d9b940b898.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
+<p>曼哈顿距离依赖座标系统，它还有一个名字叫“城市区块距离”感兴趣的可以移步<a href="https://zh.wikipedia.org/wiki/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2" target="_blank" rel="noopener">这里</a>上面看到了当t无限缩小后衍生的距离公式，那么当t无限扩大后又是什么样的结果呢？我们将明可夫斯基距离公式中的“t”放大到无穷大：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1897276-a844b82c9201882f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
+<p>这就变成了“切比雪夫距离”，这些距离都是欧式距离的特殊应用。欧式距离不能忽略比较对象的维度，所以在针对不同维度的比较对象时，需要对数据做标准化处理，这些经过处理后的标准数据，再采用欧式距离比较时有个新的名字：马哈拉诺比斯距离。</p>
+<h3 id="余弦相似度"><a href="#余弦相似度" class="headerlink" title="余弦相似度"></a>余弦相似度</h3><p>这里有个和“距离度量”类似的名词“相似度度量”，相似度度量（Similarity）在下面的会频繁用到，我们用 “Sim” 表示</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1897276-c3c0a30b73b7d501.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
+<h3 id="皮尔森相关系数"><a href="#皮尔森相关系数" class="headerlink" title="皮尔森相关系数"></a>皮尔森相关系数</h3><p>即相关分析中的相关系数 r，分别对 A 和 B 基于自身总体标准化后计算空间向量的余弦夹角:</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1897276-fea81c9674f0c9dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
+<h3 id="欧氏距离与余弦相似度"><a href="#欧氏距离与余弦相似度" class="headerlink" title="欧氏距离与余弦相似度"></a>欧氏距离与余弦相似度</h3><p>欧氏距离是最常见的距离度量，而余弦相似度则是最常见的相似度度量，很多的距离度量和相似度度量都是基于这两者的变形和衍生，所以下面重点比较下两者在衡量个体差异时实现方式和应用环境上的区别。</p>
+<p>借助三维坐标系来看下欧氏距离和余弦相似度的区别：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1897276-ef6bd871d7fee03f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/398" alt="img"></p>
+<p>从图上可以看出距离度量衡量的是空间各点间的绝对距离，跟各个点所在的位置坐标（即个体特征维度的数值）直接相关；而余弦相似度衡量的是空间向量的夹角，更加的是体现在方向上的差异，而不是位置。如果保持A点的位置不变，B点朝原方向远离坐标轴原点，那么这个时候余弦相似度cosθ是保持不变的，因为夹角不变，而A、B两点的距离显然在发生改变，这就是欧氏距离和余弦相似度的不同之处。</p>
+<p>根据欧氏距离和余弦相似度各自的计算方式和衡量特征，分别适用于不同的数据分析模型：欧氏距离能够体现个体数值特征的绝对差异，所以更多的用于需要从维度的数值大小中体现差异的分析，如使用用户行为指标分析用户价值的相似度或差异；而余弦相似度更多的是从方向上区分差异，而对绝对的数值不敏感，更多的用于使用用户对内容评分来区分用户兴趣的相似度和差异，同时修正了用户间可能存在的度量标准不统一的问题。</p>
+<p>在实际应用中都是距离度量和相似度度量结合使用，任何一个算法都是在特定场景下发挥到极致，脱离使用场景，这些伟大的发明仅仅是个公式。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/14/直播的新玩法/" itemprop="url">
-              
-                <span itemprop="name">直播的新玩法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-14T20:31:22+08:00"
-              content="2018-03-14" >
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/13/需求调研不是你想的那么简单/" itemprop="url">
-              
-                <span itemprop="name">需求调研不是你想的那么简单</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-13T20:11:08+08:00"
-              content="2018-03-13" >
-          03-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/12/禅说/" itemprop="url">
-              
-                <span itemprop="name">禅说</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-12T20:37:43+08:00"
-              content="2018-03-12" >
-          03-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/11/直播，欲望的驱动效应/" itemprop="url">
-              
-                <span itemprop="name">直播，欲望的驱动效应</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-11T09:28:31+08:00"
-              content="2018-03-11" >
-          03-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/11/产品经理识算法（二）热度算法/" itemprop="url">
-              
-                <span itemprop="name">产品经理识算法（二）热度算法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-11T09:17:26+08:00"
-              content="2018-03-11" >
-          03-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/10/年轻/" itemprop="url">
-              
-                <span itemprop="name">年轻</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-10T07:59:46+08:00"
-              content="2018-03-10" >
-          03-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/09/产品经理识算法（一）余弦相似度/" itemprop="url">
-              
-                <span itemprop="name">产品经理识算法（一）余弦相似度</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-09T12:49:07+08:00"
-              content="2018-03-09" >
-          03-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>因为感动，所以坚持。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="小吴同学 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/产品经理/" rel="tag"> <i class="fa fa-tag"></i> 产品经理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/16/产品经理识算法（三）：个性化推荐/" rel="next" title="产品经理识算法（三）：个性化推荐">
+                <i class="fa fa-chevron-left"></i> 产品经理识算法（三）：个性化推荐
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -683,6 +499,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -703,8 +523,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -790,6 +619,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#欧几里得距离"><span class="nav-number">1.</span> <span class="nav-text">欧几里得距离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#明可夫斯基距离"><span class="nav-number">2.</span> <span class="nav-text">明可夫斯基距离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#曼哈顿距离"><span class="nav-number">3.</span> <span class="nav-text">曼哈顿距离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#余弦相似度"><span class="nav-number">4.</span> <span class="nav-text">余弦相似度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#皮尔森相关系数"><span class="nav-number">5.</span> <span class="nav-text">皮尔森相关系数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欧氏距离与余弦相似度"><span class="nav-number">6.</span> <span class="nav-text">欧氏距离与余弦相似度</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -932,6 +777,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
