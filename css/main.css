@@ -1663,12 +1663,12 @@ pre .javascript .function {
   font-style: normal;
   font-variant: normal;
   font-stretch: normal;
-  font-size: 18px;
+  font-size: 10px;
   font-family: "Microsoft Yahei";
   background: #000;
 }
 #rewardButton span:hover {
-  background: #f7877f;
+  background: #ff8c00;
 }
 #QR {
   padding-top: 20px;
@@ -1936,7 +1936,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #534e2b;
+  background: #26fffb;
 }
 .links-of-blogroll {
   font-size: 13px;
