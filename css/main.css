@@ -1936,7 +1936,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #822e82;
+  background: #c2d4ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3029,6 +3029,9 @@ hr {
 }
 .v .vlist .vcard .vhead .vsys {
   display: none !important;
+}
+.v .vwrap .vcontrol .col.col-60 {
+  visibility: hidden;
 }
 .power.txt-right {
   display: none;
