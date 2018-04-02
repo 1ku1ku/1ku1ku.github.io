@@ -1936,7 +1936,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #7c8338;
+  background: #ff4224;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3023,4 +3023,10 @@ hr {
   height: 50px;
   font-size: 25px;
   border-radius: 50%;
+}
+#rewardButton {
+  border-radius: 50%;
+}
+.power.txt-right {
+  display: none;
 }
