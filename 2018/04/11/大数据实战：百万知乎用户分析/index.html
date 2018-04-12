@@ -97,6 +97,7 @@
 <meta property="og:site_name" content="人生若只如初见">
 <meta property="og:description" content="背景这几天，同事都去出差，稍有感冒的我提前在办公室感受到了“孤独终老”的恐惧。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oaab9z8h3.bkt.clouddn.com/%E7%99%BE%E4%B8%87%E7%9F%A5%E4%B9%8E%E7%94%A8%E6%88%B7%E5%88%86%E6%9E%90.jpg">
 <meta property="og:image" content="http://oaab9z8h3.bkt.clouddn.com/%E7%9F%A5%E4%B9%8E%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E6%88%AA%E5%9B%BE.png">
 <meta property="og:image" content="http://oaab9z8h3.bkt.clouddn.com/%E5%8E%9F%E5%A7%8B%E6%95%B0%E6%8D%AE.png">
 <meta property="og:image" content="http://oaab9z8h3.bkt.clouddn.com/%E7%94%A8%E6%88%B7%E5%8C%BA%E5%9F%9F%E5%88%86%E5%B8%83.png">
@@ -111,11 +112,11 @@
 <meta property="og:image" content="http://oaab9z8h3.bkt.clouddn.com/%E9%97%AE%E9%A2%98.png">
 <meta property="og:image" content="http://oaab9z8h3.bkt.clouddn.com/%E8%81%8C%E4%BD%8D%E5%88%86%E6%9E%90.png">
 <meta property="og:image" content="http://oaab9z8h3.bkt.clouddn.com/%E9%A6%96%E6%AC%A1%E6%8F%90%E9%97%AE.png">
-<meta property="og:updated_time" content="2018-04-11T13:07:52.000Z">
+<meta property="og:updated_time" content="2018-04-12T01:31:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="大数据实战：百万知乎用户分析">
 <meta name="twitter:description" content="背景这几天，同事都去出差，稍有感冒的我提前在办公室感受到了“孤独终老”的恐惧。">
-<meta name="twitter:image" content="http://oaab9z8h3.bkt.clouddn.com/%E7%9F%A5%E4%B9%8E%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E6%88%AA%E5%9B%BE.png">
+<meta name="twitter:image" content="http://oaab9z8h3.bkt.clouddn.com/%E7%99%BE%E4%B8%87%E7%9F%A5%E4%B9%8E%E7%94%A8%E6%88%B7%E5%88%86%E6%9E%90.jpg">
 
 
 
@@ -413,7 +414,8 @@
       
 
       
-        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>这几天，同事都去出差，稍有感冒的我提前在办公室感受到了“孤独终老”的恐惧。<br><a id="more"></a><br>于是，我想在自己有能力并且还有激情的时候，去做一些以后值得回忆的事。我萌生了去“探望”下知乎的念头。</p>
+        <p><img src="http://oaab9z8h3.bkt.clouddn.com/%E7%99%BE%E4%B8%87%E7%9F%A5%E4%B9%8E%E7%94%A8%E6%88%B7%E5%88%86%E6%9E%90.jpg" alt=""></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>这几天，同事都去出差，稍有感冒的我提前在办公室感受到了“孤独终老”的恐惧。<br><a id="more"></a><br>于是，我想在自己有能力并且还有激情的时候，去做一些以后值得回忆的事。我萌生了去“探望”下知乎的念头。</p>
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>我个人是15年注册知乎，三年过去了，我个人主页数据是：<br><img src="http://oaab9z8h3.bkt.clouddn.com/%E7%9F%A5%E4%B9%8E%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E6%88%AA%E5%9B%BE.png" alt=""><br>我一直不喜欢知乎上面的氛围，但是通过知乎我确实拿到了很多学习、设计、阅读和产品灵感的资源，都是通过知乎链接到其他平台；在此也感谢这个平台给每一个求知者带来的帮助和启发。这次我将利用知乎用户的数据，从数据分析的角度，以用户、区域、行业、专业、大学、喜欢数、粉丝数和性别为交叉对比展开分析，因为我迫切想知道，那些大 V 从哪来，做了什么事，是个什么背景等等像打了马赛克一样的信息。下面我们一一展开。</p>
 <h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>直接爬取知乎的用户数据，包括ID、粉丝数量、工作信息、回答数量、文章数量等等。<br><img src="http://oaab9z8h3.bkt.clouddn.com/%E5%8E%9F%E5%A7%8B%E6%95%B0%E6%8D%AE.png" alt=""><br>部分数据不完整，gender 列中“1”表示男，对应的“0”就是女啦。</p>
 <h3 id="这些用户的分布区域是什么样的"><a href="#这些用户的分布区域是什么样的" class="headerlink" title="这些用户的分布区域是什么样的"></a>这些用户的分布区域是什么样的</h3><p>拿到这些数据，我一开始不关注用户的性别，我知道，这个参考价值并不高，因为，我在一些社区都会在性别那一栏填上“女”。<br>于是， 根据用户的地域信息，得到如下这张图<br><img src="http://oaab9z8h3.bkt.clouddn.com/%E7%94%A8%E6%88%B7%E5%8C%BA%E5%9F%9F%E5%88%86%E5%B8%83.png" alt=""><br>气泡大小表示数据多少，很明显北京和上海的用户是最多的，这个地区分布有着什么样的潜在含义？读者可以思考下这个问题，后面的分析会给出答案。</p>
