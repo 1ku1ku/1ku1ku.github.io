@@ -103,7 +103,7 @@
 <meta property="og:image" content="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2019/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95/K-Means%20%E7%AE%97%E6%B3%95/003.png">
 <meta property="og:image" content="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2019/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95/K-Means%20%E7%AE%97%E6%B3%95/004.png">
 <meta property="og:image" content="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2019/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95/K-Means%20%E7%AE%97%E6%B3%95/001.png">
-<meta property="og:updated_time" content="2019-02-01T08:47:49.000Z">
+<meta property="og:updated_time" content="2019-02-14T01:21:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="产品经理识算法（六）：K-Means 算法">
 <meta name="twitter:description" content="物以类聚，人以群分。在机器学习中，对于海量的数据，经常要做的一件事就是找出他们之间的特征，将这些数据归类，就像德米特里·门捷列夫一样把各个元素整齐的排在一起，后面形成了元素周期表。 在行业中这个做法有个专业的名词叫“聚类/分类”，今天要和大家一起分享的是聚类中最常见的算法：K-Means 算法。">
@@ -414,7 +414,7 @@
 <p>监督式学习：输入的数据有标签。</p>
 <p>非监督式学习：输入的数据没有标签。</p>
 </blockquote>
-<h2 id="K-Means-算法属于非监督式"><a href="#K-Means-算法属于非监督式" class="headerlink" title="K-Means 算法属于非监督式"></a>K-Means 算法属于非监督式</h2><p>在非监督式学习中，聚类任务是使用最多的，而 K-Means 算法是聚类任务中最简单、最好理解、运算最快的一种算法。聚类的主要思想就是物理类聚，人以群分，在 K-Means 算法中实现起来主要分以下几个步骤：</p>
+<h2 id="K-Means-算法属于非监督式"><a href="#K-Means-算法属于非监督式" class="headerlink" title="K-Means 算法属于非监督式"></a>K-Means 算法属于非监督式</h2><p>在非监督式学习中，聚类任务是使用最多的，而 K-Means 算法是聚类任务中最简单、最好理解、运算最快的一种算法。聚类的主要思想就是物以类聚，人以群分，在 K-Means 算法中实现起来主要分以下几个步骤：</p>
 <blockquote>
 <ul>
 <li>定义一个 k 值，这个 k 决定了聚类后有几个类别</li>
@@ -427,15 +427,15 @@
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>为了方便说明，我模拟一组数据，如下图</p>
 <p><img src="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2019/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95/K-Means%20%E7%AE%97%E6%B3%95/001.png" alt=""></p>
 <p>我们随便定义6个点P0、P1、P2、P3、P4、P5，在二维座标系中我们可以直观的看出，前面三个点在一堆，后面三个点在一堆。接下来我们通过 K-Means 算法验证一下是不是像我们实际看到的这种扎堆特征。</p>
-<h3 id="设定-K-值开始投票"><a href="#设定-K-值开始投票" class="headerlink" title="设定 K 值开始投票"></a>设定 K 值开始投票</h3><p>我们定 K = 2，那么在6个点中随便选择两个点当作初始对象，这里我们就选 P0(0,0) 和 P1(1,2)，接下来我们计算剩下4个点 P2、P3、P4、P5 和这两个点的距离大小</p>
+<h3 id="设定-K-值开始投票"><a href="#设定-K-值开始投票" class="headerlink" title="设定 K 值开始投票"></a>设定 K 值开始投票</h3><p>我们定 K = 2，那么在6个点中随便选择两个点当作初始对象，这里我们就选 P0(0,0) 和 P1(1,2)，接下来我们分别计算剩下4个点 P2、P3、P4、P5 和P0、P1的距离</p>
 <p><img src="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2019/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95/K-Means%20%E7%AE%97%E6%B3%95/002.png" alt=""></p>
-<p>对比之后发现，在剩下的4个点中他们都和 P1 离的近一些，所以他们4个把票都投给了 P1，这时候就有两组 A 和 B,A={P0} ,B={P1,P2,P3,P4,P5}。</p>
-<h3 id="开始第二次投票"><a href="#开始第二次投票" class="headerlink" title="开始第二次投票"></a>开始第二次投票</h3><p>很显然 A 组只有 P0,所以 P0 这次还是初始对象，但是 B 组中现在有5个数据点，这次在 B 组中选取初始对象就不是随便选了，我们选择平均这5个点的横、纵坐标来形成一个之前没有的虚拟点位 P’ 当作 B 组的初始对象。那么 P’((1+3+8+9+10）/5，（2+1+8+10+7）/5) = (6.2,5.6)。这是新一轮投票结果</p>
+<p>对比之后发现，在剩下的4个点中他们都和 P1 离的近一些，所以他们4个把票都投给了 P1，这时候就有两组 A 和 B，A={P0} ,B={P1,P2,P3,P4,P5}。</p>
+<h3 id="开始第二次投票"><a href="#开始第二次投票" class="headerlink" title="开始第二次投票"></a>开始第二次投票</h3><p>很显然 A 组只有 P0,所以 P0 这次还是初始对象，但是 B 组中现在有5个数据点，这次在 B 组中选取初始对象就不是随便选了，我们选择平均这5个点的横、纵坐标来形成一个之前没有的虚拟点位 P’ ，把P’当作 B 组的初始对象。那么 P’((1+3+8+9+10）/5，（2+1+8+10+7）/5) = (6.2,5.6)。这是新一轮投票结果</p>
 <p><img src="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2019/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95/K-Means%20%E7%AE%97%E6%B3%95/003.png" alt=""></p>
 <p>这次投票后形成的 A = {P0,P1,P2},B = {P3,P4,P5}，这时候虚拟的数据点 P’ 就剔除。</p>
 <h3 id="再次投票"><a href="#再次投票" class="headerlink" title="再次投票"></a>再次投票</h3><p>按照上面的逻辑和步骤，形成新一轮投票，这是两个新的初始点位分别是Pa’=(1.33，1)，Pb’=(9,8.33)，新的投票结果是</p>
 <p><img src="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2019/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95/K-Means%20%E7%AE%97%E6%B3%95/004.png" alt=""></p>
-<p>这次投票后 A = {P0,p1,p2},B = {P3,P4,P5},这和我们前面看到的一样，前面三个点扎堆，后面三个点扎堆一致了。</p>
+<p>这次投票后 A = {P0,P1,P2},B = {P3,P4,P5},这和我们前面看到的”前面三个点扎堆，后面三个点扎堆”现象一致了。</p>
 <p><img src="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2019/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95/K-Means%20%E7%AE%97%E6%B3%95/001.png" alt=""></p>
 <p>我们可以发现，经过上面几次投票，数据已经出现了收敛，聚类到此结束，实验的结果和我们之前真实看到的完全一致。</p>
 
