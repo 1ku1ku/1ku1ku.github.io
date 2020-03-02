@@ -97,15 +97,15 @@
 <meta property="og:site_name" content="人生若只如初见">
 <meta property="og:description" content="上篇文章分享了“余弦相似度”的理解和实例应用，今天和大家一起分享下热度算法。 21世纪注定是一个信息大爆炸的时代，我们不再担心获取信息的渠道有限，信息量狭窄等问题，互联网将世界各个地方的人、事、物巧妙的链接起来，相互交互，共同渗透……">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/001.png">
-<meta property="og:image" content="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/002.png">
-<meta property="og:image" content="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/003.png">
-<meta property="og:image" content="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/004.png">
-<meta property="og:updated_time" content="2019-07-16T02:18:45.000Z">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/001.png">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/002.png">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/003.png">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/004.png">
+<meta property="og:updated_time" content="2020-03-02T06:26:54.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="产品经理识算法（二）热度算法">
 <meta name="twitter:description" content="上篇文章分享了“余弦相似度”的理解和实例应用，今天和大家一起分享下热度算法。 21世纪注定是一个信息大爆炸的时代，我们不再担心获取信息的渠道有限，信息量狭窄等问题，互联网将世界各个地方的人、事、物巧妙的链接起来，相互交互，共同渗透……">
-<meta name="twitter:image" content="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/001.png">
+<meta name="twitter:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/001.png">
 
 
 
@@ -412,7 +412,7 @@
 </ol>
 <h4 id="热度算法的基本原理"><a href="#热度算法的基本原理" class="headerlink" title="热度算法的基本原理"></a>热度算法的基本原理</h4><p>任何一个算法都存在一个巧妙的思维转换，为了便于理解，这里我们形象的举一个例子。假设现在有一杯100摄氏度的水，我们将这杯水放在室内的桌子上，很快这杯水的温度会下降到和室温保持一致，那么能得到这样一个公式：<br><strong>最后的温度T=初始温度T0-随时间衰减的温度Tt</strong><br>那么我们现在假设存在一篇文章，这篇文章最后呈现在用户面前时候有一个衡量它新鲜度的值，那么我们就可以根据这个值来把成千上万的文章有序的排列下来，让那些新鲜度高的文章展示在前面，优先让用户看到，我们形象的把这个值称为文章当前的热度。那么一起看看下面的实例吧！！！</p>
 <h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>我们以一个新闻报道为例来解释这个算法的逻辑。既然这个值是我们人为给添加的（没有哪篇文章真正存在热度），那么为了公平起见，我们把新闻类的报道分类，每一类都给一个初始的值（保证那些非常非常冷门的文章报道不至于在起跑线上就输了），好了，我们大致把报道类的文章分成：科技、金融、体育三个类别。那么最后的值P=P0-Pt。(Pt，随时间衰减的值)</p>
-<h5 id="初始值都一样吗"><a href="#初始值都一样吗" class="headerlink" title="初始值都一样吗"></a>初始值都一样吗</h5><p><img src="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/001.png" alt="img"></p>
+<h5 id="初始值都一样吗"><a href="#初始值都一样吗" class="headerlink" title="初始值都一样吗"></a>初始值都一样吗</h5><p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/001.png" alt="img"></p>
 <p>初始值P0</p>
 <p>我们先抛开“这样设定的依据是什么？“的疑问，在很多时候，规定一项制度或规章，是解释不清的，比喻“为什么过往行人一定要靠右走？靠左走行不行？”</p>
 <p>根据不同的产品，这个初始值可以调整，比喻某个体育报道的 App 他可以将体育的初始值调高一点，或者某个产品的用户数据体现出，金融类文章的点击率和收藏量很高，那么针对这些用户这类文章的初始值也可以微调高于其他类。</p>
@@ -427,13 +427,13 @@
 <p>计算方法是: 　 对dT/dt=-k<em>(T-C)进行积分,得 ln(T-C)=-kt+B (B为积分常数) (T-C)=e^(-kt+B) 公式1 设t=0,也就是物体的初温,上述公式1变成 (T0-C)=e^B 然后代入公式1得 T=C+(T0-C)</em>e^-kt 算出B与k,代入t的值,就可以算出某个时间物体的温度.</p>
 </blockquote>
 <p>科学的解释总是符合一点，balabala 一大堆，最后还是不知道说的啥。。。我们简化上面的内容，直接上公式</p>
-<p><img src="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/002.png" alt="img"></p>
+<p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/002.png" alt="img"></p>
 <p>很明显，热度的衰减不是线性变化的，那么我们的文章冷却就可以参考这个定律（文章不可能说过十小时就掉10分，其变化也不是线性的）那么类似的，我们可以得到一个公式：</p>
-<p><img src="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/003.png" alt="img"></p>
+<p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/003.png" alt="img"></p>
 <p>热度衰减公式</p>
 <p>（有兴趣的可以去推导这个公式，为了不制造麻烦，现在你只需要记住这个公式就行，其中T0是发布文章时间，T1是当前时间，e=2.7182818284…）</p>
 <h5 id="最后的公式"><a href="#最后的公式" class="headerlink" title="最后的公式"></a>最后的公式</h5><p>经过上面的分析，最后公式就演变成：</p>
-<p><img src="https://1ku1ku-1257267892.cos.na-siliconvalley.myqcloud.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/004.png" alt="img"></p>
+<p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/004.png" alt="img"></p>
 <p>分值计算公式</p>
 <p>这样一来，就可以根据初始值、衰减值，最后算出当前值，然后给文章排序。这里我们不做数学公式演示，有兴趣的可以自己制造数据尝试为100篇文章排一下序。</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>热度算法应用中，我们首先明确我们的思路，以一个分值来衡量某篇文章的新鲜度和热门程度，然后以这个分值作为排序的标准。最后解决一些影响分值变化的因子最终得出具体的计算公式。</p>
@@ -593,7 +593,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
