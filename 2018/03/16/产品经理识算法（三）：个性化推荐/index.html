@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans,en,default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "19dfdfb5"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="有上篇和上上篇的基础，我们就可以针对性的对一个产品搭建出一个个性化推荐模型，在这个模型中，我们需要解决两个问题：">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="产品经理识算法（三）：个性化推荐">
+<meta property="og:url" content="http://www.wuzuozhi.com/2018/03/16/产品经理识算法（三）：个性化推荐/index.html">
+<meta property="og:site_name" content="人生若只如初见">
+<meta property="og:description" content="有上篇和上上篇的基础，我们就可以针对性的对一个产品搭建出一个个性化推荐模型，在这个模型中，我们需要解决两个问题：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/001.png">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/002.png">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/003.png">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/004.png">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/005.png">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/006.png">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/007.png">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/008.png">
+<meta property="og:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/009.png">
+<meta property="og:updated_time" content="2020-03-02T06:30:07.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="产品经理识算法（三）：个性化推荐">
+<meta name="twitter:description" content="有上篇和上上篇的基础，我们就可以针对性的对一个产品搭建出一个个性化推荐模型，在这个模型中，我们需要解决两个问题：">
+<meta name="twitter:image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/001.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.wuzuozhi.com/2018/03/16/产品经理识算法（三）：个性化推荐/"/>
+
+
+
+
+
+  <title>产品经理识算法（三）：个性化推荐 | 人生若只如初见</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">人生若只如初见</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.wuzuozhi.com/2018/03/16/产品经理识算法（三）：个性化推荐/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小吴同学">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/%E5%A4%B4%E5%83%8F/%E5%A4%B4%E5%83%8F00.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人生若只如初见">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">产品经理识算法（三）：个性化推荐</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-16T19:00:38+08:00">
+                2018-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/我爱数学/" itemprop="url" rel="index">
+                    <span itemprop="name">我爱数学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/16/产品经理识算法（三）：个性化推荐/" class="leancloud_visitors" data-flag-title="产品经理识算法（三）：个性化推荐">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>   
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>有<a href="https://wuzuozhi.com/2018/03/11/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%E7%83%AD%E5%BA%A6%E7%AE%97%E6%B3%95/" target="_blank" rel="noopener">上篇</a>和<a href="https://wuzuozhi.com/2018/03/09/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" target="_blank" rel="noopener">上上篇</a>的基础，我们就可以针对性的对一个产品搭建出一个个性化推荐模型，在这个模型中，我们需要解决两个问题：</p>
+<a id="more"></a>
+<ul>
+<li>第一推荐什么。</li>
+<li>第二哪些内容应该优先推荐。</li>
+</ul>
+<p>上两篇文章很好的给出了具体的算法参考，大家可以回顾。</p>
+<p>在进入这篇文章的正题之前，我们先一起解决上篇文章遗留的问题：</p>
+<p>1.依据上面的公式，最后的分值 P 是不是会变成负数？比喻 08 年北京的奥运会的某篇报道……</p>
+<p>2.很多 App 上的文章都有转发、收藏、点赞等功能，那么有这些因素存在后，算法该怎么调整？</p>
+<p>先来解决第一个问题，我们看一下上篇文章中我们最后的公式为：</p>
+<p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/001.png" alt="img"></p>
+<p>那么为了避免出现负数（其实负数并不影响算法的执行，只是在某些环境下，为了数据美观，我们尽量避免负数出现）这个问题很好调整，我们只需要将上面的公式做下微调</p>
+<p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/002.png" alt="img"></p>
+<p>经过微调之后，热度值无限接近于零，这也符合实际，时间过去的越久，一篇文章的热度就越低。</p>
+<p>我们知道任何一篇报道或文章都存在用户交互行为，像评论、收藏、点赞、转发等等行为是影响热度的重要指标，这个时候我们引入一个新的因子：用户行为分；我们用</p>
+<p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/003.png" alt="img"></p>
+<p>表示，</p>
+<p>那么我的公式最后就调整为：</p>
+<p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/004.png" alt="img"></p>
+<p>在算法执行初期，根据运营的数据和经验，合理制定用户行为分，例如：</p>
+<p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/005.png" alt="img"></p>
+<p>不同的产品这些分值可以调整，在算法实施过程中尽量保证各个影响因子能够调整配置。</p>
+<p>好了，上面的问题解决了。看似很简单，做起来是很复杂的……</p>
+<p>当你和我一样，顺着这个思路，一步一步将这些算法上线之后，并获得一定的数据反馈和领导的认可，恭喜你，你的内容产品已经顺利度过早期阶段，拥有几万或者十几万的日活。每当这个时候，你会发现由于这些内容在你所制定的算法驱动下呈现给用户，会出现以下几个问题：<br>1.内容太过集中<br>2.个性化和长尾化的内容都被埋没</p>
+<p>抱着解决这两个问题的目的，是时候上个性化推荐了。个性化推荐一般有两种解决方案，基于内容的个性化推荐；基于用户的个性化推荐。这两种解决方案，用通俗的话解释：喜欢A的用户在某种程度上也喜欢和A相似的B；喜欢A的用户1和喜欢A的用户2，在某种程度上有一定的相似性，那么尽量把用户2喜欢的某个物品（或文章）B推荐给用户1。</p>
+<p>这两种解决方案，市场上都有典型的代表产品，基于用户的协同过滤对用户的规模要求相当高，所以今天的文章内容我们就以基于内容的个性化推荐为例展开。</p>
+<p>我们先来看看几个名词“特征向量、分词、关键词”，任何两篇文章或者两本书或者两个歌单，我们都可以用“特征向量”来标识目标的属性，文章、书籍、歌单是所有标签（关键词）的合集，那么标签越类似两个目标内容越相似。获得关键词的第一步是要讲目标进行拆分，为了简捷，我们以两篇文章为例：</p>
+<p>1.分词<br>分词前面有提到过，分词有两个词库，正常词库和停用词库。正常词库类似一个规则，将目标文章按规则来分词；停用词库是去掉目标文章中没用的词，比喻：“了、吗、的、地”和“the、are、that”等之类的，因为这些词对分析没有任何作用，在分词前先剔除。</p>
+<p>网络每天都在更新，正常词库和停用词库需要不断的更新，如果某篇文章中出现“疯狂打call”“尬聊”“扎心了，老铁”等词之后，机器算法是识别不了的。所以词库需要不断的更新，这些网上有很多，各种各样可供参考。</p>
+<p>2.关键词<br>关键词是决定一篇文章的特征向量指标，有没有可能两篇文章的关键词重合的90%，但是讲的却是两件事呢？答案是肯定的。看个例子：</p>
+<p>文章1:“支付宝和往年一样又开始集福分钱了”主要讲述支付宝的集福活动，“支付宝”是个高频词，文章最后说了句：“大家可以分钱了”，那么“分钱”最后也被收录，进入了特征向量.</p>
+<p>文章2:“现在过年压岁钱我都是支付宝发”。“支付宝”按例被收录，文章最后总结的时候说“每年过个年，都是在分钱，压岁钱都支付宝发，感觉时代进步真快”，虽然整篇文章“分线”只出现一次，但是还是被收录进入特征向量。</p>
+<p>两篇文章的关键词非常类似，但是讲述的却是两个完全不同的事，这个时候机器算法就会出错，将这些相关性弱的文章误以为类似，这个时候推荐出去就会出大事，所以特征向量还需要引入第二个指标，叫词频TF（Term Frequency），衡量每个关键词在文章中出现的频率。</p>
+<p>那么又有一个问题，如果两篇文章的关键词重合度很高，词频也和接近，是不是说明关联性就很强呢？大多数情况是这样的，但是也有特殊，比喻某些文章都是将武汉的，武汉美食、武汉大学、武汉互联网、武汉体育等等，这些关键词都包含武昌、汉阳、汉口等，并且都有这相似的频率，那么算法就会误以为他们是相关性极强的文章，所以我们引入一个新的指标，即在所有文章中出现频率的相反值，用IDF（Inverse Document Frequency）表示。这个也很好理解，因为一个词在所有文章出现的频率小，在某篇文章中出现的频率大，这个词就对该篇文章的标识作用越大。因此，关键词对文章的作用衡量出来就为TFIDF=TF*IDF，这个就是著名的TF-IDF模型。</p>
+<p>3.算法实现</p>
+<p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/006.png" alt="img"></p>
+<p>根据前面几篇文章的内容，两个向量的夹角越小，相似度越高，假设两篇文章的特征向量如下表：</p>
+<p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/007.png" alt="img"></p>
+<p>那么这两篇文章就由“支付宝”和“分钱”两个重合关键词决定，根据余弦相似度可以算出两篇文章的相似度，这里不做赘述，有心的朋友可以看看前面的<a href="https://www.jianshu.com/p/32c30556aad7" target="_blank" rel="noopener">文章</a>。</p>
+<p>4.用户特征<br>用户特征类似热度算法一样，根据用户阅读、评论、收藏、转发等行为来赋予一个“钟意度”，例如</p>
+<p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/008.png" alt="img"></p>
+<p>那么将文章和用户钟意度结合起来，我们只需要将关键词的TFIDF乘以用户行为特征即可得到用户特征分数。</p>
+<p><img src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/2018/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/009.png" alt="img"></p>
+<p>我们有文章特征、用户特征，就能根据根据用户关键词做匹配，得出最符合用户胃口的文章，做出个性化推荐。基于内容的个性化推荐不需要大规模的用户量，无论几亿、几千甚至几百都可以，因此是绝大多数产品前期做推荐的不二首选。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>因为感动，所以坚持。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="小吴同学 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"> <i class="fa fa-tag"></i> 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/15/谁知道这首诗的名字？/" rel="next" title="谁知道这首诗的名字？">
+                <i class="fa fa-chevron-left"></i> 谁知道这首诗的名字？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/22/产品经理识算法（四）：数据挖掘之距离计算算法/" rel="prev" title="产品经理识算法（四）：数据挖掘之距离计算算法">
+                产品经理识算法（四）：数据挖掘之距离计算算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://blog-1257267892.cos.ap-chengdu.myqcloud.com/%E5%A4%B4%E5%83%8F/%E5%A4%B4%E5%83%8F00.png"
+                alt="小吴同学" />
+            
+              <p class="site-author-name" itemprop="name">小吴同学</p>
+              <p class="site-description motion-element" itemprop="description">万事从人，百年皆客。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.pmcaff.com/user/profile/261205" target="_blank" title="Pmcaff">
+                      
+                        <i class="fa fa-fw fa-coffee"></i>Pmcaff</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小吴同学</span>
+
+  
+</div>
+
+
+  
+</div>
+
+  <!-- <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+-->
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("faX46uaBA2iveeVLXEiBllCx-gzGzoHsz", "mEs1MYNL901mISgzDMCWKsoF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
